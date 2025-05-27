@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %} 注文受付(確認) {% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <nav class="nav">
+		<a href="{% url 'ordering:order_list' table_number %}" class="btn-back"><div></div></a>
+      	<div>注文受付(確認)</div>
+    </nav>
+	<div class="table_num"><font size="6">{{table_number}}</font></div>
+	
+	<div class="check_menu">
+    {% if order_products %}
+    	<table class="table">
+			<tbody>
+        {% for order_product in order_products %}
+			<tr>
+			<td>
+			{{ order_product.product.name }} /
+			￥{{ order_product.product.price }}
+			</td>
+			</tr>
+			<tr>
+			<td style="text-align: center;">
+			<div class="btn-count" onclick="updateCount('{{ order_product.product.id }}', '{{ order.id }}', 'add')">+</div>
+			<div class="count" id="count_{{ order_product.product.id }}">{{ order_product.count }}</div>
+			<div class="btn-count" onclick="updateCount('{{ order_product.product.id }}', '{{ order.id }}', 'sub')">-</div>
+			</td>
+			<td><a href="{% url 'ordering:delete_check_order' table_number order_product.id%}">
+				<i class="fa-solid fa-trash"></i>
+			    </a></td>
+			</tr>
+        {% endfor %}
+        	</tbody>
+		</table>
+    {% else %}
+    <p>注文がありません</p>
+	{% endif %}
+	
+	<a href="{% url 'ordering:order_confirmed' table_number%}" class="btn">注文を確定する</a>
+	</div>
+
+<script>
+  function updateCount(productId, orderId, action) { 
+    // フォームサブミット
+    fetch('{% url "ordering:update_order_product" %}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-CSRFToken': '{{ csrf_token }}',
+      },
+      body: `product_id=${productId}&order_id=${orderId}&action=${action}`,
+      })
+    .then(response => response.json())
+    .then(data => {
+      // サーバーからの応答で数量を更新
+      document.getElementById(`count_${productId}`).innerText = data.count;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+</script>
+
+{% endblock %}

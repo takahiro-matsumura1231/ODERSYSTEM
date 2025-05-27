@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} メニュー編集 {% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <nav class="nav">
+		<a href="{% url 'ordering:change_menu' %}" class="btn-back"><div></div></a>
+      	<div>メニュー編集</div>
+    </nav>
+    
+    <div class="change_menu">
+		<form action="{% url 'ordering:edit_menu' product_id %}" method="post">
+		{% csrf_token %}
+		<table>
+		{{ form.as_table }}
+		</table>
+		<input value="確定" type="submit" class="btn"/>
+		</form>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} テーブル番号選択 {% endblock %}
+
+{% block main %}
+
+<div class="container">
+	<a href="{% url 'ordering:home' %}" class="btn-back"><div></div></a>
+	<div class="table-nav">テーブル番号</div>
+	<div class="table">
+	{% for key, value in table_list.items %}
+	<a href="{% url 'ordering:check_already_ordered' key %}" class="btn {% if value %}ordered{% endif %}">{{key}}</a>
+	<span></span>
+	{% endfor %}
+	</div>
+</div>
+
+{% endblock %}

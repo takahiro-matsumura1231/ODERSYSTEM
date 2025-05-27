@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} 会計処理完了 {% endblock %}
+
+{% block main %}
+
+<div class="container">  
+    <div class="accounted">
+		<p>会計処理完了</p>
+   		<a href="{% url 'ordering:home' %}" class="btn">ホームへ</a>
+	</div>
+</div>
+
+{% endblock %}

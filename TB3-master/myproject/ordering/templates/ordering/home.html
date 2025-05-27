@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} ホーム {% endblock %}
+
+{% block main %}
+
+<div class="container">
+	<a href="{% url 'ordering:change_menu' %}" class="btn-manage"><i class="fa-solid fa-gear"></i></a>
+	<div class="reception">
+		<a href="{% url 'ordering:input_table_number' %}" class="btn"><div>注文受付</div></a>
+	</div>
+</div>
+
+{% endblock %}

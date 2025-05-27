@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %} メニュー追加・修正 {% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <nav class="nav">
+		<a href="{% url 'ordering:home' %}" class="btn-back"><div></div></a>
+      	<div>メニュー編集</div>
+    </nav>
+
+<div class="tab_wrap">
+    {% for key, velue in category_list.items %}
+	<input id="tab{{ key }}" type="radio" name="tab_btn"
+	{% if key == 1 %}
+	checked
+	{% endif %}
+	>
+	{% endfor %}
+	
+	<div class="tab_area">
+		{% for key, value in category_list.items %}
+		<label class="tab{{ key }}_label" for="tab{{ key }}">{{ value }}</label>
+		{% endfor%}
+	</div>
+	<div class="panel_area edit">
+		{% for key, value in category_list.items %}
+		<div id="panel{{ key }}" class="tab_panel">
+			<table class="table">
+			<tbody>
+			{% for product in object_list %}
+			<tr>
+			{% if product.category_id == key %}
+			 	  <td>{{ product.name }}<br>
+				  ￥{{ product.price }}/
+			      {% if product.tax %}
+			      {{ tax.0 }}
+			      {% else %}
+			      {{ tax.1 }}
+			      {% endif %}
+			      </td>
+			      <td><a href="{% url 'ordering:edit_menu' product.id %}">
+					  <i class="fa-solid fa-pen-to-square"></i>
+				  </td>
+			      <td><a href="{% url 'ordering:delete_menu' product.id %}">
+					  <i class="fa-solid fa-trash"></i>
+					  </a>
+				  </td>
+			{% endif %}
+			</tr>
+			{% endfor %}
+			</tr>
+			</tbody>
+			</table>				
+		</div>
+		{% endfor %}
+	</div>
+	<a href="{% url 'ordering:add_menu' %}" class="btn">追加</a>
+</div>
+
+{% endblock %}

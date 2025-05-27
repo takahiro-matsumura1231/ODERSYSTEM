@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %} 注文受付 {% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <nav class="nav">
+		<a href="{% url 'ordering:check_already_ordered' table_number %}" class="btn-back"><div></div></a>
+      	<div>注文受付</div>
+    </nav>
+	<div class="table_num"><font size="6">{{table_number}}</font></div>
+
+
+<!--タブの表示を行う-->
+<div class="tab_wrap">
+	<input id="tab0" type="radio" name="tab_btn" checked>
+    {% for key, velue in category_list.items %}
+	<input id="tab{{ key }}" type="radio" name="tab_btn">
+	{% endfor %}
+	
+	<div class="tab_area">
+		<label class="tab0_label" for="tab0">すべて</label>
+		{% for key, value in category_list.items %}
+		<label class="tab{{ key }}_label" for="tab{{ key }}">{{ value }}</label>
+		{% endfor %}
+	</div>
+	<div class="panel_area">
+		<div id="panel0" class="tab_panel">
+		<!-- 全商品を表示する -->
+			<table class="table">
+			<tbody>
+			{% for product in product_list %}
+			<tr>
+			<td>
+			{{ product.name }} /
+			￥{{ product.price }}
+			</td>
+			<td>
+			<div class="btn-count" onclick="updateCount('{{ product.id }}', '{{ order.id }}', 'add')">+</div>
+			<div class="count count_{{ product.id }}">{{ product.count }}</div>
+			<div class="btn-count" onclick="updateCount('{{ product.id }}', '{{ order.id }}', 'sub')">-</div>
+			</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+			</table>				
+		</div>
+		<!-- カテゴリー別に表示する -->
+		{% for key, value in category_list.items %}
+		<div id="panel{{ key }}" class="tab_panel">
+			<table class="table">
+			<tbody>
+			{% for product in product_list %}
+			<tr>
+			{% if product.category_id == key %}
+			<td>
+			{{ product.name }} /
+			￥{{ product.price }}
+			</td>
+			<td>
+			<div class="btn-count" onclick="updateCount('{{ product.id }}', '{{ order.id }}', 'add')">+</div>
+			<div class="count count_{{ product.id }}">{{ product.count }}</div>
+			<div class="btn-count" onclick="updateCount('{{ product.id }}', '{{ order.id }}', 'sub')">-</div>
+			</td>
+			{% endif %}
+			</tr>
+			{% endfor %}
+			</tbody>
+			</table>				
+		</div>
+		{% endfor %}
+
+	</div>
+	<a href="{% url 'ordering:check_order' table_number%}" class="btn">確認画面ヘ</a>
+</div>
+</div>
+
+
+<script>
+  function updateCount(productId, orderId, action) { 
+    // フォームサブミット
+    fetch('{% url "ordering:update_order_product" %}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-CSRFToken': '{{ csrf_token }}',
+      },
+      body: `product_id=${productId}&order_id=${orderId}&action=${action}`,
+      })
+    .then(response => response.json())
+    .then(data => {
+      // サーバーからの応答で数量を更新
+      var product_count = document.getElementsByClassName(`count_${productId}`)
+      for (var i = 0; i < product_count.length; i++){
+		  product_count[i].innerText = data.count;
+	  }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+</script>
+
+{% endblock %}

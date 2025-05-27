@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} 各テーブル注文管理 {% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <a href="{% url 'ordering:input_table_number' %}" class="btn-back"><div></div></a>
+	<div class="manage-order">
+    	<div class="number-nav"> テーブル番号<br><font size="7">{{table_number}}</font></div>
+    	<a href="{% url 'ordering:modification_order' table_number %}" class="btn">確認/修正</a>
+		<a href="{% url 'ordering:add_order_list' table_number %}" class="btn">追加注文</a>
+		<a href="{% url 'ordering:accounting' table_number %}" class="btn">会計</a>
+    </div>
+</div>
+
+{% endblock %}

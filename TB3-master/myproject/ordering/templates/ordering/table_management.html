@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} 新規注文 {% endblock %}
+
+{% block main %}
+
+<head>
+ <link rel="stylesheet" href="../../static/css/button.css">
+</head>
+
+<div class="container">
+    <nav class="nav">
+     <div class="navbar-brand"> テーブル番号{{table_number}}</div>
+    </nav>
+    <a href="{% url 'ordering:order_list' table_number %}" class="btn-square">新規注文</a>
+    <a href="{% url 'ordering:order_list' table_number %}" class="btn-square">確認/修正</a>
+    <a href="{% url 'ordering:order_list' table_number %}" class="btn-square">追加注文</a>
+    <a href="{% url 'ordering:order_list' table_number %}" class="btn-square">会計</a>
+</div>
+
+{% endblock %}

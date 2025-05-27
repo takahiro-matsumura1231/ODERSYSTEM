@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} 会計 {% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <nav class="nav">
+		<a href="{% url 'ordering:check_already_ordered' table_number %}" class="btn-back"><div></div></a>
+      	<div>会計</div>
+    </nav>
+	<div class="table_num"><font size="6">{{table_number}}</font></div>
+
+	<div class="accounting">
+    {% if order_list %}
+        <table>
+		<tbody>
+			{% for product in order_list %}
+			<tr>
+			<td style="text-align: left;">
+			{{ product.name }}
+			{% if product.tax %}※{% endif %}
+			{% if product.count == 1 %}
+			<td style="text-align: right;">￥{{ product.price }}</td>
+			{% else %}
+			<td style="text-align: right;">￥{{ product.price }}　× {{ product.count }}<br>￥{{ product.sum }}</td>
+			{% endif %}
+			</td>
+			</tr>
+			{% endfor %}
+			<tr>
+			<td style="border: none;"></td>
+			<td style="text-align: right; border: none;">小計　￥{{ total.out }}</td>
+			</tr>
+			<tr>
+			<td style="border: none;"></td>
+			<td style="text-align: right; border: none;">消費税　￥{{ total.tax }}</td>
+			</tr>
+			<tr>
+			<td style="border: none;"></td>
+			<td style="text-align: right; border: none;">合計　￥{{ total.in }}</td>
+			</tr>
+		</tbody>
+		</table>
+		<span>※軽減税率対象商品です</span>
+     
+	    <div>
+	    <p>内訳</p>
+	    <p>10%対象 ￥{{ total.out10 }}</p>
+	    <p>消費税 ￥{{ total.tax10 }}</p>
+	    <p>8%対象 ￥{{ total.out8 }}</p>
+	    <p>消費税 ￥{{ total.tax8 }}</p>
+	    </div>
+
+    {% else %}
+    <span>注文がありません</span>
+	{% endif %}
+	</div>
+	
+	<div class="accounting-btn">
+	<a href="{% url 'ordering:accounting_confirmed' table_number%}" class="btn center">会計を確定する</a>
+	</div>
+
+{% endblock %}

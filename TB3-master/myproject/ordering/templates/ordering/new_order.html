@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %} 新規注文 {% endblock %}
+
+{% block main %}
+
+<div class="container">
+	<a href="{% url 'ordering:input_table_number' %}" class="btn-back"><div></div></a>
+	<div class="new-order">
+    	<div class="number-nav"> テーブル番号<br><font size="7">{{table_number}}</font></div>
+    	<a href="{% url 'ordering:order_list' table_number %}" class="btn new-order">新規注文</a>
+    </div>
+</div>
+
+{% endblock %}

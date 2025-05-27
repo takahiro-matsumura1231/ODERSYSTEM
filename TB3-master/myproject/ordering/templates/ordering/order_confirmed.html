@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} 注文確定確認 {% endblock %}
+
+{% block main %}
+
+<div class="container">
+	<div class="accounted">
+		<p>{{ table_number }}番の注文を<br>確定します</p>
+   		<a href="{% url 'ordering:order_completed' table_number %}" class="btn">はい</a>
+ 		<a href="{% url 'ordering:check_order' table_number %}" class="btn">いいえ</a>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,387 @@
+@charset "utf-8";
+
+/* フォント Noto Sans JP */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+/* 大きさに境界線を含める すべてに適用 */
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font: 16px/1.6 "Noto Sans JP","Hiragino Kaku Gothic Pro","Osaka","メイリオ","ＭＳ Ｐゴシック","MS PGothic",Verdana,Arial,sans-serif;
+    margin:0;
+    color: #313131;
+    background-color: #fff
+  }
+
+table {
+    border-collapse: collapse; /* セルの線を重ねる */
+}
+th, td {
+	height: 50px;
+	text-align: left;
+	padding: 0 10px;
+	background: rgb(255, 255, 255);
+}
+
+.btn{
+	display: inline-block;
+    text-decoration: none;
+ 	width: auto;
+ 	padding: 10px 10px;
+ 	margin: 10px;
+  	background: rgba(0, 128, 255, 0.5);/*ボタン色*/
+  	color: #FFF;
+  	text-align: center;
+  	border: none;
+  	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  	border-radius: 5px;
+}
+.btn:active {
+  	/*ボタンを押したとき*/
+  	transform: translateY(3px); 
+  	transition: 0.1s ease-out;
+  	box-shadow: none;
+}
+
+.btn-manage, .btn-back{
+  	/*周りの凹み*/
+  	display: inline-block;
+ 	position: relative;
+  	text-decoration: none;
+  	color: rgba(3, 169, 244, 0.54);
+  	width: 70px;
+  	height: 70px;
+  	margin: 5px;
+  	border-radius: 50%;
+  	text-align: center;
+  	background: #f7f7f7;
+  	box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+}
+.btn-manage i {
+  	position: absolute;
+  	content: '';
+  	width: 50px;
+  	height: 50px;
+  	line-height: 50px;
+  	left: 10px;
+  	top: 9px;
+  	border-radius: 50%;
+  	font-size: 30px;
+  	color:rgb(128, 128, 128);
+  	background: rgba(192, 192, 192, 0.8);
+  	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.btn-back div{
+	display: inline-block;
+	position: absolute;
+	left: 8px;
+  	top: 9px;
+	width: 50px;
+	height: 50px;
+}
+.btn-back div::before { /* 背景の表示設定 */
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 3px;
+  width: 50px; /* 横幅 */
+  height: 50px; /* 高さ */
+  border-radius: 50%; /* 角の丸み */
+  background: rgba(192, 192, 192, 0.8);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+} 
+.btn-back div::after { /* くの字の表示設定 */
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 20px;
+  height: 20px;
+  border-top: 5px solid rgb(128, 128, 128);
+  border-right: 5px solid rgb(128, 128, 128);
+  border-radius: 3px;
+  transform: rotate(-135deg);
+}
+
+.btn-manage:active, .btn-back:active{
+  	transform: scale(1.1, 1.1);
+  	transition: 0.1s ease-out;
+}
+.btn-manage i:active, .btn-back div:active {
+  	transform: scale(0.9, 0.9);
+  	transition: 0.1s ease-out;
+}
+.btn-back div:active::after {
+	left: 15px;
+	transition: 0.1s ease-out;
+}
+
+.btn-count {
+	display: inline-block;
+	margin: 10px 0;
+	width: 50px;
+	height: 50px;
+	font-size: 40px;
+	line-height: 50px;
+	color: #fff;
+	background: rgba(128, 128, 128, 0.5);
+	border-radius: 3px;
+	text-align: center;
+}
+.count {
+	display: inline-block;
+	margin: 5px;
+	font-size: 20px;
+}
+.btn-count:active {
+	background: rgba(128, 128, 128, 0.8);
+	transition: 0.1s ease-out;
+}
+
+/*home*/
+.reception {
+	padding-top: 150px;
+	text-align: center;
+}
+.reception .btn, .new-order .btn{
+	width: 200px;
+	height: 100px;
+	line-height: 100px;
+	font-size: 30px;
+}
+
+/*input_table_number*/
+.table-nav {
+	font-size: 30px;
+	text-align: center;
+	margin: 0 10px 20px;
+}
+.table {
+	width: 95%;
+	margin: 10px auto;
+	text-align: center;
+}
+.table .btn{
+	width: 60px;
+	height: 60px;
+	margin: 0 8px;
+	line-height: 60px;
+}
+.ordered{
+	background: rgba(0, 128, 255, 0.9);
+}
+.table span:nth-child(8n){
+	content:"";
+ 	display: block;
+ 	height: 15px;
+}
+
+/*new_order manage-order*/
+.new-order, .number-nav, manage_order{
+	text-align: center;
+	font-size: 30px;
+	margin: 10px;
+}
+.manage-order .btn {
+	display: block;
+	margin: 15px auto;
+	font-size: 20px;
+}
+.manage-order a:nth-of-type(1), .manage-order a:nth-of-type(2){
+	width: 150px;
+	height: 80px;
+	line-height: 80px;
+}
+.manage-order a:nth-of-type(3) {
+	width: 170px;
+	height: 90px;
+	line-height: 90px;
+}
+
+/*order_list*/
+nav {
+	position: relative;
+	border-bottom: 3px rgb(128, 128, 128) solid ;
+}
+nav .btn-back {
+	position: absolute;
+}
+nav div {
+	height: 80px;
+	line-height: 80px;
+	font-size: 20px;
+	text-align: center;
+}
+.table_num {
+	margin: 5px 30px;
+}
+.tab_wrap{
+	width: 90%;
+	margin: 10px auto;
+	text-align: center;
+}
+input[type="radio"]{
+	display:none;
+}
+.tab_area {
+	white-space: nowrap;
+	overflow-x: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	text-align: left;
+}
+.tab_area::-webkit-scrollbar{
+  display: none;
+}
+.tab_area label{
+	display: inline-block; 
+	margin-right: 1px; 
+	padding: 10px;
+	color: #fff; 
+	background: rgba(128, 128, 128, 0.9); 
+	border-radius: 5px 5px 0 0;
+	text-align: center; 
+	transition: ease 0.2s;
+}
+.panel_area{
+	height: 350px;
+	background:rgba(128, 128, 128, 0.5);
+	border-radius: 0 0 5px 5px;
+	overflow-y: scroll; 
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.panel_area::-webkit-scrollbar{
+  display: none;
+}
+.panel_area table td:nth-of-type(2) {
+	min-width: 150px;
+}
+.panel_area table td {
+	border-bottom: 3px solid rgba(128, 128, 128, 0.5);
+}
+.tab_panel{
+	display:none;
+	width:100%; 
+	padding: 10px 0;
+}
+
+#tab0:checked ~ .tab_area .tab0_label{background:rgba(128, 128, 128, 0.5); color:#fff;}
+#tab0:checked ~ .panel_area #panel0{display:block;}
+#tab1:checked ~ .tab_area .tab1_label{background: rgba(128, 128, 128, 0.5); color:#fff;}
+#tab1:checked ~ .panel_area #panel1{display:block;}
+#tab2:checked ~ .tab_area .tab2_label{background: rgba(128, 128, 128, 0.5); color:#fff;}
+#tab2:checked ~ .panel_area #panel2{display:block;}
+#tab3:checked ~ .tab_area .tab3_label{background: rgba(128, 128, 128, 0.5); color:#fff;}
+#tab3:checked ~ .panel_area #panel3{display:block;}
+
+.tab_wrap .btn{
+	padding: 10px;
+	margin: 20px;
+}
+
+/*check_order modification_order*/
+.check_menu {
+	width: 90%; 
+	margin: 10px auto;
+	text-align: center;
+}
+
+/*accounting*/
+.accounting {
+	margin: 10px;
+	padding: 10px;
+	border: 3px solid rgba(128, 128, 128, 0.5);
+	text-align: right;
+}
+.accounting table {
+	width: 100%;
+}
+.accounting table td {
+	height: 40px;
+	border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+.accounting span {
+	display: block;
+	font-size: 15px;
+	text-align: left;
+}
+.accounting div {
+	display: inline-block;
+	width: 150px;
+	text-align: left;
+}
+.accounting div p:not(:first-child) {
+	margin: 10px;
+	text-align: right;
+}
+.accounting-btn {
+	text-align: center;
+}
+/*accounting_confirmed accounting_completed*/
+.accounted {
+	width: 90%; 
+	margin: 200px auto;
+	text-align: center;
+}
+.accounted p {
+	font-size: 30px;
+}
+.accounted .btn{
+	width: 100px;
+	margin: 20px;
+}
+
+/*add_menu, add_menu_change*/
+.edit table td:nth-of-type(2) {
+	min-width: 0;
+}
+.fa-trash, .fa-pen-to-square{
+	color: rgba(128, 128, 128, 0.8);
+	font-size: 20px;
+	padding: 5px;
+}
+.change_menu {
+	text-align: center;
+}
+.change_menu table {
+	margin: 0 auto;
+	text-align: center;
+}
+.change_menu input[type="radio"] {
+	display: inline;
+}
+
+@media screen and (max-width: 340px){
+	/*input_table_number*/
+	.table span:nth-child(8n){
+ 		display: inline;
+	}
+	.table span:nth-child(6n){
+		content:"";
+ 		display: block;
+ 		height: 15px;
+	}
+	/*order_list*/
+	.panel_area table td:nth-of-type(2) {
+		min-width: 130px;
+	}
+	.btn-count {
+		margin: 5px 0;
+		width: 40px;
+		height: 40px;
+		font-size: 30px;
+		line-height: 40px;
+	}
+	/*accounting*/
+	.accounted .btn{
+		margin: 10px;
+	}
+}
